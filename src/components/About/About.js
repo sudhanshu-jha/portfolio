@@ -1,179 +1,99 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import { motion } from "framer-motion";
 import Particle from "../Particle";
 import Github from "./Github";
 import Techstack from "./Techstack";
 import Aboutcard from "./AboutCard";
 import Toolstack from "./Toolstack";
 
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
+});
+
 function About() {
   return (
     <Container fluid className="about-section">
       <Particle />
-      <Container>
-        <div
-          style={{
-            transform: "perspective(1000px) rotateX(-5deg)",
-            transformStyle: "preserve-3d",
-            animation: "slideInDown 1s ease-out",
-            marginBottom: "40px",
-          }}
-        >
-          <h1
-            style={{
-              color: "white",
-              padding: "20px",
-              textAlign: "center",
-              fontSize: "2.8em",
-              textShadow: "0 15px 30px rgba(192, 132, 245, 0.4)",
-              transform: "translateZ(30px)",
-              background: "linear-gradient(45deg, #c084f5, #7c3aed)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
+      <Container style={{ position: "relative", zIndex: 1 }}>
+
+        <motion.div style={{ textAlign: "center", marginBottom: 56 }} {...fadeUp(0)}>
+          <p className="about-label" style={{ display: "inline-block", marginBottom: 16 }}>
+            Introduction
+          </p>
+          <h1 style={{
+            fontSize: "clamp(2.5rem, 6vw, 4rem)",
+            fontWeight: 700,
+            letterSpacing: "-0.04em",
+            color: "#f0f4ff",
+            margin: 0,
+          }}>
             About <span className="purple">Me</span>
           </h1>
-        </div>
+        </motion.div>
 
-        <div
-          style={{
-            transform: "perspective(1000px) rotateY(-3deg)",
-            transformStyle: "preserve-3d",
-            animation: "slideInLeft 1s ease-out 0.2s both",
-            marginBottom: "60px",
-          }}
-        >
+        <motion.div style={{ marginBottom: 72 }} {...fadeUp(0.1)}>
           <Aboutcard />
-        </div>
+        </motion.div>
 
-        <div
-          style={{
-            transform: "perspective(1000px) rotateX(2deg)",
-            transformStyle: "preserve-3d",
-            animation: "slideInRight 1s ease-out 0.4s both",
-            marginBottom: "40px",
-          }}
-        >
-          <h1
-            className="project-heading"
-            style={{
-              color: "white",
-              padding: "20px",
-              textAlign: "center",
-              textShadow: "0 10px 20px rgba(192, 132, 245, 0.3)",
-              transform: "translateZ(20px)",
-            }}
-          >
-            Professional <strong className="purple">Skillset</strong>
-          </h1>
-          <div
-            style={{
-              transform: "translateZ(15px)",
-              background: "rgba(255, 255, 255, 0.02)",
-              borderRadius: "20px",
-              padding: "30px",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
-              backdropFilter: "blur(10px)",
-            }}
-          >
-            <Techstack />
-          </div>
-        </div>
+        <motion.div style={{ marginBottom: 24, textAlign: "center" }} {...fadeUp(0.15)}>
+          <h2 style={{
+            fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
+            fontWeight: 700,
+            letterSpacing: "-0.035em",
+            color: "#f0f4ff",
+            marginBottom: 8,
+          }}>
+            Professional <span className="purple">Skillset</span>
+          </h2>
+        </motion.div>
 
-        <div
+        <motion.div
           style={{
-            transform: "perspective(1000px) rotateY(3deg)",
-            transformStyle: "preserve-3d",
-            animation: "slideInLeft 1s ease-out 0.6s both",
-            marginBottom: "40px",
+            background: "rgba(255,255,255,0.03)",
+            borderRadius: 20,
+            padding: 32,
+            border: "1px solid rgba(99,179,237,0.12)",
+            marginBottom: 72,
           }}
+          {...fadeUp(0.2)}
         >
-          <h1
-            className="project-heading"
-            style={{
-              color: "white",
-              padding: "20px",
-              textAlign: "center",
-              textShadow: "0 10px 20px rgba(192, 132, 245, 0.3)",
-              transform: "translateZ(20px)",
-            }}
-          >
-            <strong className="purple">Tools</strong> I use
-          </h1>
-          <div
-            style={{
-              transform: "translateZ(15px)",
-              background: "rgba(255, 255, 255, 0.02)",
-              borderRadius: "20px",
-              padding: "30px",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
-              backdropFilter: "blur(10px)",
-            }}
-          >
-            <Toolstack />
-          </div>
-        </div>
+          <Techstack />
+        </motion.div>
 
-        <div
+        <motion.div style={{ marginBottom: 24, textAlign: "center" }} {...fadeUp(0.25)}>
+          <h2 style={{
+            fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
+            fontWeight: 700,
+            letterSpacing: "-0.035em",
+            color: "#f0f4ff",
+            marginBottom: 8,
+          }}>
+            <span className="purple">Tools</span> I Use
+          </h2>
+        </motion.div>
+
+        <motion.div
           style={{
-            transform: "perspective(1000px) rotateX(-2deg)",
-            transformStyle: "preserve-3d",
-            animation: "slideInUp 1s ease-out 0.8s both",
+            background: "rgba(255,255,255,0.03)",
+            borderRadius: 20,
+            padding: 32,
+            border: "1px solid rgba(99,179,237,0.12)",
+            marginBottom: 72,
           }}
+          {...fadeUp(0.3)}
         >
+          <Toolstack />
+        </motion.div>
+
+        <motion.div {...fadeUp(0.35)}>
           <Github />
-        </div>
+        </motion.div>
+
       </Container>
-
-      <style jsx>{`
-        @keyframes slideInDown {
-          from {
-            opacity: 0;
-            transform: perspective(1000px) rotateX(-45deg) translateY(-100px);
-          }
-          to {
-            opacity: 1;
-            transform: perspective(1000px) rotateX(-5deg) translateY(0);
-          }
-        }
-
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: perspective(1000px) rotateY(-45deg) translateX(-100px);
-          }
-          to {
-            opacity: 1;
-            transform: perspective(1000px) rotateY(-3deg) translateX(0);
-          }
-        }
-
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: perspective(1000px) rotateX(-30deg) translateX(100px);
-          }
-          to {
-            opacity: 1;
-            transform: perspective(1000px) rotateX(2deg) translateX(0);
-          }
-        }
-
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: perspective(1000px) rotateX(-45deg) translateY(100px);
-          }
-          to {
-            opacity: 1;
-            transform: perspective(1000px) rotateX(-2deg) translateY(0);
-          }
-        }
-      `}</style>
     </Container>
   );
 }

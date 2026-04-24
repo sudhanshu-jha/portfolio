@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
@@ -8,15 +8,11 @@ function NavBar() {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
 
-  function scrollHandler() {
-    if (window.scrollY >= 20) {
-      updateNavbar(true);
-    } else {
-      updateNavbar(false);
-    }
-  }
-
-  window.addEventListener("scroll", scrollHandler);
+  useEffect(() => {
+    const handle = () => updateNavbar(window.scrollY >= 20);
+    window.addEventListener("scroll", handle);
+    return () => window.removeEventListener("scroll", handle);
+  }, []);
 
   return (
     <Navbar
@@ -26,14 +22,12 @@ function NavBar() {
       className={navColour ? "sticky" : "navbar"}
     >
       <Container>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/" style={{ letterSpacing: "0.06em", fontSize: "0.95rem" }}>
           SJ
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
-          onClick={() => {
-            updateExpanded(expand ? false : "expanded");
-          }}
+          onClick={() => updateExpanded(expand ? false : "expanded")}
         >
           <span></span>
           <span></span>
@@ -41,31 +35,19 @@ function NavBar() {
         </Navbar.Toggle>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto" defaultActiveKey="#home">
-            <Nav.Item>
-              <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
-                Home
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link as={Link} to="/about" onClick={() => updateExpanded(false)}>
-                About
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link as={Link} to="/project" onClick={() => updateExpanded(false)}>
-                Projects
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link as={Link} to="/products" onClick={() => updateExpanded(false)}>
-                Products
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link as={Link} to="/resume" onClick={() => updateExpanded(false)}>
-                Resume
-              </Nav.Link>
-            </Nav.Item>
+            {[
+              { label: "Home",     to: "/" },
+              { label: "About",    to: "/about" },
+              { label: "Projects", to: "/project" },
+              { label: "Products", to: "/products" },
+              { label: "Resume",   to: "/resume" },
+            ].map(({ label, to }) => (
+              <Nav.Item key={label}>
+                <Nav.Link as={Link} to={to} onClick={() => updateExpanded(false)}>
+                  {label}
+                </Nav.Link>
+              </Nav.Item>
+            ))}
           </Nav>
         </Navbar.Collapse>
       </Container>

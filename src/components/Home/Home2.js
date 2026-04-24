@@ -1,39 +1,52 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { AiFillGithub, AiOutlineTwitter } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
+});
 
 function Home2() {
   return (
     <div className="home-about-section" id="about">
-      <div className="home-about-section-inner">
-        <div className="about-content-grid">
-          <div className="about-text-col">
-            <p className="about-label">About me</p>
-            <h2 className="about-headline">
+      <div className="section-inner">
+        <div className="h2-grid">
+
+          <div className="h2-text-col">
+            <motion.p className="about-label" {...fadeUp(0)}>
+              About me
+            </motion.p>
+            <motion.h2 className="about-headline" {...fadeUp(0.1)}>
               Building things<br />I believe in.
-            </h2>
-            <p className="about-body">
+            </motion.h2>
+            <motion.p className="about-body" {...fadeUp(0.2)}>
               I fell in love with programming and never looked back.
               Fluent in <b>Python, FastAPI,</b> and <b>Machine Learning</b> —
               I build products where backend rigor meets thoughtful interfaces.
-            </p>
-            <p className="about-body" style={{ marginTop: "20px" }}>
+            </motion.p>
+            <motion.p className="about-body" style={{ marginTop: 20 }} {...fadeUp(0.3)}>
               My work spans <b>web technologies</b> and <b>ML systems</b>.
               I reach for <b>React.js, Next.js,</b> and modern JavaScript
               when bringing ideas to life on the frontend.
-            </p>
+            </motion.p>
           </div>
-          <div className="about-connect-col">
-            <p className="social-section-label">Connect</p>
-            <div className="social-links-row">
+
+          <div className="h2-connect-col">
+            <motion.p className="social-section-label" {...fadeUp(0.15)}>
+              Connect
+            </motion.p>
+            <motion.div className="social-links-row" {...fadeUp(0.25)}>
               <a
                 href="https://github.com/sudhanshu-jha"
                 target="_blank"
                 rel="noreferrer"
                 className="social-link-pill"
               >
-                <AiFillGithub size={16} />
-                GitHub
+                <AiFillGithub size={16} /> GitHub
               </a>
               <a
                 href="https://x.com/Sudhanshujha91"
@@ -41,8 +54,7 @@ function Home2() {
                 rel="noreferrer"
                 className="social-link-pill"
               >
-                <AiOutlineTwitter size={16} />
-                X / Twitter
+                <AiOutlineTwitter size={16} /> X / Twitter
               </a>
               <a
                 href="https://www.linkedin.com/in/sudhanshu-jha/"
@@ -50,40 +62,63 @@ function Home2() {
                 rel="noreferrer"
                 className="social-link-pill"
               >
-                <FaLinkedinIn size={14} />
-                LinkedIn
+                <FaLinkedinIn size={14} /> LinkedIn
               </a>
-            </div>
+            </motion.div>
+
+            {/* Stats strip */}
+            <motion.div className="h2-stats" {...fadeUp(0.35)}>
+              {[
+                { n: "10+",  label: "Years building" },
+                { n: "10+", label: "Projects shipped" },
+              ].map(({ n, label }) => (
+                <div key={label} className="h2-stat">
+                  <span className="h2-stat-n">{n}</span>
+                  <span className="h2-stat-l">{label}</span>
+                </div>
+              ))}
+            </motion.div>
           </div>
+
         </div>
       </div>
 
       <style>{`
-        .home-about-section-inner {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 48px;
-        }
-        .about-content-grid {
+        .h2-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 80px;
           align-items: start;
         }
-        .about-connect-col {
-          padding-top: 72px;
+        .h2-connect-col { padding-top: 64px; }
+        .h2-stats {
+          display: flex;
+          gap: 32px;
+          margin-top: 48px;
+          flex-wrap: wrap;
+        }
+        .h2-stat {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        .h2-stat-n {
+          font-size: 2rem;
+          font-weight: 700;
+          letter-spacing: -0.04em;
+          color: #63b3ed;
+          line-height: 1;
+        }
+        .h2-stat-l {
+          font-size: 0.75rem;
+          font-weight: 400;
+          color: rgba(200,215,240,0.4);
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
         }
         @media (max-width: 768px) {
-          .home-about-section-inner {
-            padding: 0 24px;
-          }
-          .about-content-grid {
-            grid-template-columns: 1fr;
-            gap: 48px;
-          }
-          .about-connect-col {
-            padding-top: 0;
-          }
+          .h2-grid { grid-template-columns: 1fr; gap: 48px; }
+          .h2-connect-col { padding-top: 0; }
         }
       `}</style>
     </div>

@@ -19,27 +19,26 @@ import {
 
 function Techstack() {
   const iconStyle = {
-    transition: "all 0.3s ease",
-    transform: "perspective(1000px) translateZ(10px)",
-    transformStyle: "preserve-3d",
+    transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
     padding: "20px",
-    borderRadius: "15px",
-    background: "linear-gradient(135deg, rgba(192, 132, 245, 0.1), rgba(124, 58, 237, 0.1))",
-    border: "1px solid rgba(192, 132, 245, 0.3)",
-    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
-    backdropFilter: "blur(5px)",
+    borderRadius: "14px",
+    background: "rgba(99,179,237,0.05)",
+    border: "1px solid rgba(99,179,237,0.15)",
+    boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
   };
 
   const handleMouseEnter = (e) => {
-    e.currentTarget.style.transform = "perspective(1000px) translateZ(30px) rotateY(15deg) rotateX(-10deg)";
-    e.currentTarget.style.boxShadow = "0 20px 40px rgba(192, 132, 245, 0.4)";
-    e.currentTarget.style.background = "linear-gradient(135deg, rgba(192, 132, 245, 0.2), rgba(124, 58, 237, 0.2))";
+    e.currentTarget.style.transform = "perspective(800px) rotateY(10deg) rotateX(-6deg) translateY(-4px)";
+    e.currentTarget.style.boxShadow = "0 16px 40px rgba(99,179,237,0.2)";
+    e.currentTarget.style.borderColor = "rgba(99,179,237,0.4)";
+    e.currentTarget.style.background = "rgba(99,179,237,0.1)";
   };
 
   const handleMouseLeave = (e) => {
-    e.currentTarget.style.transform = "perspective(1000px) translateZ(10px)";
-    e.currentTarget.style.boxShadow = "0 10px 20px rgba(0, 0, 0, 0.2)";
-    e.currentTarget.style.background = "linear-gradient(135deg, rgba(192, 132, 245, 0.1), rgba(124, 58, 237, 0.1))";
+    e.currentTarget.style.transform = "none";
+    e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.3)";
+    e.currentTarget.style.borderColor = "rgba(99,179,237,0.15)";
+    e.currentTarget.style.background = "rgba(99,179,237,0.05)";
   };
 
   return (

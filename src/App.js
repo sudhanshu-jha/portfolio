@@ -7,6 +7,7 @@ import Projects from "./components/Projects/Projects";
 import Products from "./components/Products/Products";
 import Footer from "./components/Footer";
 import Resume from "./components/Resume/ResumeNew";
+import { PrismaHero } from "./components/ui/prisma-hero";
 import {
   BrowserRouter as Router,
   Route,
@@ -41,6 +42,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} />
+          <Route path="/prisma" element={<PrismaHero />} />
           <Route path="*" element={<Navigate to="/"/>} />
         </Routes>
         <Footer />
