@@ -356,6 +356,27 @@ body {
   color: #90cdf4 !important;
 }
 
+/* ── Products page ── */
+.product-section {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 100px !important;
+  padding-bottom: 80px !important;
+  background: var(--bg) !important;
+  background-image: none !important;
+}
+
+.product-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(99,179,237,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,179,237,0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+}
+
 /* ── About page ── */
 .about-section {
   position: relative !important;
