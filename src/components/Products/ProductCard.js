@@ -2,7 +2,6 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
-import { CgWebsite } from "react-icons/cg";
 import { BsCart3 } from "react-icons/bs";
 import { AiOutlineEye } from "react-icons/ai";
 
