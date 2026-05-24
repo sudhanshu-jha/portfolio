@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Type from "./Type";
 import Home2 from "./Home2";
+import { SplineScene } from "../ui/splite";
+import { Spotlight } from "../ui/spotlight";
+import GlobeSection from "./GlobeSection";
 
 const CUBES = [
   { size: 60, x: "10%",  y: "20%", delay: 0,    dur: 12, rx: 1,   ry: 0.6 },
@@ -54,6 +57,53 @@ function Cube({ size, x, y, delay, dur, rx, ry }) {
   );
 }
 
+const STEPS = [
+  { status: "done",    text: "mcp_server.connect",     detail: "{ tools: 14 }" },
+  { status: "done",    text: "context.load",            detail: '"portfolio.md"' },
+  { status: "done",    text: "llm.reason",              detail: "{ model: 'claude-opus' }" },
+  { status: "running", text: "tool.call",               detail: '"write_code", { lang: "py" }' },
+  { status: "pending", text: "api.deploy",              detail: "FastAPI → prod" },
+  { status: "pending", text: "eval.run",                detail: "{ suite: 'e2e' }" },
+];
+
+function AgentTerminal() {
+  const [step, setStep] = useState(0);
+
+  const tick = useCallback(() => {
+    setStep((s) => (s + 1) % STEPS.length);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(tick, 1400);
+    return () => clearInterval(id);
+  }, [tick]);
+
+  return (
+    <div className="agent-terminal">
+      <div className="agent-header">
+        <span className="agent-dot running" />
+        <span className="agent-title">agent.run</span>
+        <span className="agent-model">claude-opus · mcp</span>
+      </div>
+      <div className="agent-body">
+        {STEPS.map((s, i) => {
+          const isActive = i === step;
+          const isDone   = i < step || (step === 0 && i === STEPS.length - 1);
+          return (
+            <div key={i} className={`agent-step ${isActive ? "active" : ""} ${isDone ? "done" : ""}`}>
+              <span className="agent-status">
+                {isDone    ? "✓" : isActive ? "⟳" : "·"}
+              </span>
+              <span className="agent-fn">{s.text}</span>
+              <span className="agent-arg">({s.detail})</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function Home() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -95,61 +145,79 @@ function Home() {
         {/* Horizon glow */}
         <div className="hero3d-glow" />
 
-        {/* Main content with mouse parallax */}
-        <motion.div
-          className="hero3d-content"
-          style={{ rotateX, rotateY, transformPerspective: 1200 }}
-        >
-          <motion.p
-            className="hero3d-eyebrow"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Portfolio
-          </motion.p>
+        {/* Spotlight interaction */}
+        <Spotlight size={400} />
 
-          <motion.h1
-            className="hero3d-name"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Sudhanshu Jha.
-          </motion.h1>
-
-          <motion.p
-            className="hero3d-tagline"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Full Stack Developer. ML Engineer.
-          </motion.p>
-
+        {/* Split layout: text left, 3D right */}
+        <div className="hero3d-split">
+          {/* Left — text content with mouse parallax */}
           <motion.div
-            className="hero3d-type"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Type />
+            className="hero3d-content"
+            style={{ rotateX, rotateY, transformPerspective: 1200 }}
+          >            
+            <motion.h1
+              className="hero3d-name"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Sudhanshu Jha.
+            </motion.h1>
+
+            <motion.p
+              className="hero3d-tagline"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Builder of Agentic AI Systems.
+            </motion.p>
+
+            <motion.div
+              className="hero3d-type"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Type />
+            </motion.div>
+
+            <motion.div
+              className="hero3d-cta"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Link to="/project" className="hero3d-btn-primary">
+                View Projects
+              </Link>
+              <Link to="/about" className="hero3d-btn-secondary">
+                Learn more ›
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <AgentTerminal />
+            </motion.div>
           </motion.div>
 
+          {/* Right — Spline 3D scene */}
           <motion.div
-            className="hero3d-cta"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="hero3d-spline"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Link to="/project" className="hero3d-btn-primary">
-              View Projects
-            </Link>
-            <Link to="/about" className="hero3d-btn-secondary">
-              Learn more ›
-            </Link>
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-full h-full"
+            />
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Scroll indicator */}
         <motion.div
@@ -164,6 +232,7 @@ function Home() {
       </div>
 
       <Home2 />
+      <GlobeSection />
 
       <style>{`
         .hero3d {
@@ -249,14 +318,7 @@ function Home() {
           z-index: 2;
         }
 
-        /* ── Content ── */
-        .hero3d-content {
-          position: relative;
-          z-index: 10;
-          text-align: center;
-          padding: 0 24px;
-          will-change: transform;
-        }
+        /* ── Content (override: flex child, left-aligned) ── */
 
         .hero3d-eyebrow {
           font-size: clamp(0.7rem, 1.5vw, 0.85rem);
@@ -390,6 +452,106 @@ function Home() {
         @keyframes scrollPulse {
           0%, 100% { opacity: 0.4; transform: scaleY(1); }
           50%       { opacity: 1;   transform: scaleY(1.1); }
+        }
+
+        /* ── Agent terminal ── */
+        .agent-terminal {
+          margin-top: 28px;
+          background: rgba(0,0,0,0.55);
+          border: 1px solid rgba(99,179,237,0.18);
+          border-radius: 10px;
+          overflow: hidden;
+          font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+          font-size: 0.72rem;
+          backdrop-filter: blur(12px);
+          max-width: 360px;
+        }
+        .agent-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 14px;
+          background: rgba(99,179,237,0.06);
+          border-bottom: 1px solid rgba(99,179,237,0.1);
+        }
+        .agent-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #68d391;
+          animation: agentPulse 1.6s ease-in-out infinite;
+        }
+        @keyframes agentPulse {
+          0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(104,211,145,0.4); }
+          50%       { opacity: 0.7; box-shadow: 0 0 0 4px rgba(104,211,145,0); }
+        }
+        .agent-title  { flex: 1; color: rgba(200,215,240,0.5); letter-spacing: 0.06em; }
+        .agent-model  { color: rgba(99,179,237,0.4); letter-spacing: 0.04em; font-size: 0.65rem; }
+        .agent-body   { padding: 10px 14px; display: flex; flex-direction: column; gap: 5px; }
+        .agent-step {
+          display: flex;
+          align-items: baseline;
+          gap: 6px;
+          opacity: 0.28;
+          transition: opacity 0.3s;
+        }
+        .agent-step.done    { opacity: 0.55; }
+        .agent-step.active  { opacity: 1; }
+        .agent-status {
+          width: 12px;
+          flex-shrink: 0;
+          color: rgba(99,179,237,0.7);
+          font-size: 0.65rem;
+        }
+        .agent-step.done .agent-status   { color: #68d391; }
+        .agent-step.active .agent-status { color: #63b3ed; animation: spinChar 0.6s linear infinite; }
+        @keyframes spinChar {
+          0%   { content: "⟳"; opacity: 1; }
+          50%  { opacity: 0.5; }
+          100% { opacity: 1; }
+        }
+        .agent-fn  { color: rgba(200,215,240,0.75); }
+        .agent-arg { color: rgba(99,179,237,0.5); }
+
+        /* ── Split layout ── */
+        .hero3d-split {
+          position: relative;
+          z-index: 10;
+          display: flex;
+          align-items: center;
+          width: 100%;
+          max-width: 1280px;
+          padding: 0 48px;
+          gap: 40px;
+        }
+
+        .hero3d-content {
+          flex: 1;
+          text-align: left;
+          will-change: transform;
+        }
+
+        .hero3d-spline {
+          flex: 1;
+          height: 560px;
+          min-width: 0;
+        }
+
+        @media (max-width: 900px) {
+          .hero3d-split {
+            flex-direction: column;
+            padding: 0 24px;
+          }
+          .hero3d-content {
+            text-align: center;
+          }
+          .hero3d-cta {
+            justify-content: center;
+          }
+          .hero3d-spline {
+            width: 100%;
+            height: 320px;
+          }
         }
 
         @media (max-width: 767px) {
