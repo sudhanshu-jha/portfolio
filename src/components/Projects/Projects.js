@@ -5,8 +5,17 @@ import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
 import leaf from "../../Assets/Projects/leaf.png";
 import bitsOfCode from "../../Assets/Projects/blog.png";
+import eventflow from "../../Assets/Projects/eventflow.png";
 
 const PROJECTS = [
+  {
+    imgPath: eventflow,
+    title: "EventFlow",
+    description:
+      "Production-grade async analytics & notification platform. Pyramid + GraphQL API, Celery/Redis task queue, PostgreSQL, JWT auth, webhooks, and a React 18 dashboard. Full OpenTelemetry distributed tracing, Nginx load balancing, and Kubernetes-ready with HPA autoscaling.",
+    ghLink: "https://github.com/sudhanshu-jha/eventflow",
+    demoLink: "",
+  },
   {
     imgPath: leaf,
     title: "Plant AI",
