@@ -5,8 +5,6 @@ import Type from "./Type";
 import Home2 from "./Home2";
 import { Spotlight } from "../ui/spotlight";
 import GlobeSection from "./GlobeSection";
-import { WebGLShader } from "../ui/web-gl-shader";
-
 const CUBES = [
   { size: 60, x: "10%",  y: "20%", delay: 0,    dur: 12, rx: 1,   ry: 0.6 },
   { size: 40, x: "80%",  y: "15%", delay: 2,    dur: 9,  rx: 0.5, ry: 1   },
@@ -125,7 +123,6 @@ function Home() {
 
   return (
     <section>
-      <WebGLShader />
       <div className="hero3d">
         {/* Vignette */}
         <div className="hero3d-vignette" />
