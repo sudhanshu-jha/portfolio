@@ -18,8 +18,7 @@ function ResumeNew() {
     setWidth(window.innerWidth);
   }, []);
 
-  const handlePdfError = (error) => {
-    console.error("PDF Load Error:", error);
+  const handlePdfError = () => {
     setPdfError(true);
   };
 
@@ -70,7 +69,6 @@ function ResumeNew() {
               className="d-flex justify-content-center"
               onLoadError={handlePdfError}
               onLoadSuccess={() => {
-                console.log("PDF loaded successfully");
                 setPdfError(false);
               }}
             >
@@ -78,9 +76,6 @@ function ResumeNew() {
                 pageNumber={1}
                 scale={width > 786 ? 1.7 : 0.6}
                 onLoadError={handlePdfError}
-                onLoadSuccess={() => {
-                  console.log("Page loaded successfully");
-                }}
               />
             </Document>
           )}

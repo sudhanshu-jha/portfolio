@@ -147,6 +147,18 @@ body {
 .navbar-nav .nav-link:hover { color: var(--text) !important; }
 .navbar-nav .nav-item a::after { display: none !important; }
 
+.nav-active-dot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--blue);
+  margin-left: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
 @media (max-width: 767px) {
   .navbar { height: auto; padding: 14px 24px !important; }
   .navbar-collapse {

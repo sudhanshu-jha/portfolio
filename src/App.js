@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
-import Products from "./components/Products/Products";
 import Footer from "./components/Footer";
 import Resume from "./components/Resume/ResumeNew";
 import { PrismaHero } from "./components/ui/prisma-hero";
@@ -39,7 +38,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/project" element={<Projects />} />
-          <Route path="/products" element={<Products />} />
           <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/prisma" element={<PrismaHero />} />

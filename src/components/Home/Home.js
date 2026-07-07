@@ -6,6 +6,7 @@ import Home2 from "./Home2";
 import { SplineScene } from "../ui/splite";
 import { Spotlight } from "../ui/spotlight";
 import GlobeSection from "./GlobeSection";
+import { WebGLShader } from "../ui/web-gl-shader";
 
 const CUBES = [
   { size: 60, x: "10%",  y: "20%", delay: 0,    dur: 12, rx: 1,   ry: 0.6 },
@@ -125,6 +126,7 @@ function Home() {
 
   return (
     <section>
+      <WebGLShader />
       <div className="hero3d">
         {/* Vignette */}
         <div className="hero3d-vignette" />
@@ -239,7 +241,7 @@ function Home() {
           position: relative;
           width: 100%;
           min-height: 100vh;
-          background: #060810;
+          background: transparent;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -251,7 +253,9 @@ function Home() {
         .hero3d-vignette {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse at center, transparent 40%, rgba(6,8,16,0.85) 100%);
+          background:
+            radial-gradient(ellipse at center, rgba(6,8,16,0.55) 0%, rgba(6,8,16,0.88) 100%),
+            linear-gradient(to bottom, rgba(6,8,16,0.3) 0%, transparent 30%, rgba(6,8,16,0.4) 100%);
           pointer-events: none;
           z-index: 2;
         }

@@ -8,6 +8,22 @@ import bitsOfCode from "../../Assets/Projects/blog.png";
 
 const PROJECTS = [
   {
+    imgPath: leaf,
+    title: "Plant AI",
+    description:
+      "Image classifier trained on the Kaggle plant disease dataset using PyTorch + ResNet34. Achieved 98% accuracy across 38 plant classes with a production-ready inference API.",
+    ghLink: "",
+    demoLink: "",
+  },
+  {
+    imgPath: leaf,
+    title: "Emotion Detection",
+    description:
+      "CNN trained on FER-2013 with Keras. OpenCV pipeline handles real-time face detection; the model classifies 7 emotions at 30fps on CPU.",
+    ghLink: "",
+    demoLink: "",
+  },
+  {
     imgPath: bitsOfCode,
     title: "Chatify",
     description:
@@ -19,7 +35,7 @@ const PROJECTS = [
     imgPath: bitsOfCode,
     title: "Bits-0f-C0de",
     description:
-      "Personal blog built with Next.js and Tailwind CSS. Renders markdown content with dark mode support.",
+      "Personal blog built with Next.js and Tailwind CSS. Renders markdown content with syntax highlighting and dark mode support.",
     ghLink: "",
     demoLink: "",
   },
@@ -27,33 +43,9 @@ const PROJECTS = [
     imgPath: bitsOfCode,
     title: "Editor.io",
     description:
-      "Online code and markdown editor with live preview. Supports HTML, CSS, JS and auto-saves to Local Storage.",
+      "Browser-based code and markdown editor with live preview pane. Supports HTML, CSS, JS with auto-save to Local Storage.",
     ghLink: "",
     demoLink: "",
-  },
-  {
-    imgPath: leaf,
-    title: "Plant AI",
-    description:
-      "Image classifier trained on Kaggle plant disease dataset using PyTorch + ResNet34. Achieved 98% accuracy across 38 plant classes.",
-    ghLink: "#",
-    demoLink: "#",
-  },
-  {
-    imgPath: leaf,
-    title: "AI Model",
-    description:
-      "Advanced machine learning model built with cutting-edge algorithms for real-world problem solving.",
-    ghLink: "",
-    demoLink: "",
-  },
-  {
-    imgPath: leaf,
-    title: "Emotion Detection",
-    description:
-      "CNN trained on FER-2013 with Keras; Open-CV pipeline for real-time face detection and emotion classification.",
-    ghLink: "",
-    demoLink: "#",
   },
 ];
 

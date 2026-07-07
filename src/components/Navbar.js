@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handle = () => updateNavbar(window.scrollY >= 20);
@@ -39,15 +40,23 @@ function NavBar() {
               { label: "Home",     to: "/" },
               { label: "About",    to: "/about" },
               { label: "Projects", to: "/project" },
-              { label: "Products", to: "/products" },
               { label: "Resume",   to: "/resume" },
-            ].map(({ label, to }) => (
-              <Nav.Item key={label}>
-                <Nav.Link as={Link} to={to} onClick={() => updateExpanded(false)}>
-                  {label}
-                </Nav.Link>
-              </Nav.Item>
-            ))}
+            ].map(({ label, to }) => {
+              const isActive = location.pathname === to;
+              return (
+                <Nav.Item key={label}>
+                  <Nav.Link
+                    as={Link}
+                    to={to}
+                    onClick={() => updateExpanded(false)}
+                    style={isActive ? { color: "var(--text)" } : undefined}
+                  >
+                    {label}
+                    {isActive && <span className="nav-active-dot" />}
+                  </Nav.Link>
+                </Nav.Item>
+              );
+            })}
           </Nav>
         </Navbar.Collapse>
       </Container>
