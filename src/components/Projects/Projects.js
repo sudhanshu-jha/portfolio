@@ -6,6 +6,7 @@ import Particle from "../Particle";
 import leaf from "../../Assets/Projects/leaf.png";
 import bitsOfCode from "../../Assets/Projects/blog.png";
 import eventflow from "../../Assets/Projects/eventflow.png";
+import wildfire from "../../Assets/Projects/wildfire.png";
 
 const PROJECTS = [
   {
@@ -14,6 +15,14 @@ const PROJECTS = [
     description:
       "Production-grade async analytics & notification platform. Pyramid + GraphQL API, Celery/Redis task queue, PostgreSQL, JWT auth, webhooks, and a React 18 dashboard. Full OpenTelemetry distributed tracing, Nginx load balancing, and Kubernetes-ready with HPA autoscaling.",
     ghLink: "https://github.com/sudhanshu-jha/eventflow",
+    demoLink: "",
+  },
+  {
+    imgPath: wildfire,
+    title: "Wildfire Detection Pipeline",
+    description:
+      "Event-driven microservices pipeline — drone telemetry ingested via FastAPI, ONNX vision model classifies frames, Rothermel spread model predicts fire perimeters, alerting broadcasts via WebSocket. React + Leaflet dashboard with real-time alerts. NATS JetStream message bus, Postgres, Docker Compose, Kafka-swappable.",
+    ghLink: "https://github.com/sudhanshu-jha/wildfire-pipeline",
     demoLink: "",
   },
   {
