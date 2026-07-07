@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Type from "./Type";
 import Home2 from "./Home2";
-import { SplineScene } from "../ui/splite";
 import { Spotlight } from "../ui/spotlight";
 import GlobeSection from "./GlobeSection";
 import { WebGLShader } from "../ui/web-gl-shader";
@@ -207,18 +206,6 @@ function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Right — Spline 3D scene */}
-          <motion.div
-            className="hero3d-spline"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <SplineScene
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full"
-            />
-          </motion.div>
         </div>
 
         {/* Scroll indicator */}
@@ -523,38 +510,30 @@ function Home() {
           z-index: 10;
           display: flex;
           align-items: center;
+          justify-content: center;
           width: 100%;
-          max-width: 1280px;
+          max-width: 860px;
           padding: 0 48px;
-          gap: 40px;
         }
 
         .hero3d-content {
-          flex: 1;
-          text-align: left;
+          width: 100%;
+          text-align: center;
           will-change: transform;
         }
 
-        .hero3d-spline {
-          flex: 1;
-          height: 560px;
-          min-width: 0;
+        .hero3d-cta {
+          justify-content: center;
+        }
+
+        .agent-terminal {
+          margin-left: auto;
+          margin-right: auto;
         }
 
         @media (max-width: 900px) {
           .hero3d-split {
-            flex-direction: column;
             padding: 0 24px;
-          }
-          .hero3d-content {
-            text-align: center;
-          }
-          .hero3d-cta {
-            justify-content: center;
-          }
-          .hero3d-spline {
-            width: 100%;
-            height: 320px;
           }
         }
 
