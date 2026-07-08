@@ -1,7 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
-import Particle from "../Particle";
 import Github from "./Github";
 import Aboutcard from "./AboutCard";
 import OrbitingSkills from "../ui/orbiting-skills";
@@ -16,7 +15,6 @@ const fadeUp = (delay = 0) => ({
 function About() {
   return (
     <Container fluid className="about-section">
-      <Particle />
       <Container style={{ position: "relative", zIndex: 1 }}>
 
         <motion.div style={{ textAlign: "center", marginBottom: 56 }} {...fadeUp(0)}>

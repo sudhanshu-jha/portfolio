@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import ProductCard from "./ProductCard";
-import Particle from "../Particle";
 
 const PRODUCTS = [
   {
@@ -83,7 +82,6 @@ const fadeUp = (delay = 0) => ({
 function Products() {
   return (
     <Container fluid className="product-section">
-      <Particle />
       <Container style={{ position: "relative", zIndex: 1 }}>
 
         <motion.div style={{ textAlign: "center", marginBottom: 56 }} {...fadeUp(0)}>
